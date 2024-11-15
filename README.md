@@ -39,3 +39,6 @@ This repository contains several Python scripts for deploying infrastructures on
 ## Educational Objective
 
 These scripts provide a practical introduction to infrastructure as code on Azure, allowing students to explore and correct deployments in a real environment.
+
+Student:
+Paulo Ramires - 20060484
