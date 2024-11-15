@@ -29,4 +29,12 @@ network_client.virtual_networks.begin_create_or_update(rg_name, vnet_name, vnet_
 subnet_params = {"address_prefix": "10.0.0.0/24"}
 network_client.subnets.begin_create_or_update(rg_name, vnet_name, subnet_name, subnet_params).result()
 
+# Create Subnets for each component
+for subnet_name, prefix in zip(subnet_names, subnet_prefixes):
+    subnet_params = {"address_prefix": prefix}
+    network_client.subnets.begin_create_or_update(rg_name, vnet_name, subnet_name, subnet_params).result()
+
+
+
+
 # No subnet, NIC, or VM configurations provided
