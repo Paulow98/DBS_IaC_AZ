@@ -4,6 +4,7 @@
 
 from azure.identity import DefaultAzureCredential
 from azure.mgmt.resource import ResourceManagementClient
+from azure.mgmt.compute import ComputeManagementClient
 from azure.mgmt.network import NetworkManagementClient
 
 # Initialize clients
@@ -16,9 +17,16 @@ resource_client = ResourceManagementClient(credentials, subscription_id)
 rg_name = "TestResourceGroup"
 resource_client.resource_groups.create_or_update(rg_name, {})
 
-# Virtual Network creation (no address space specified)
-vnet_name = "TestVNet"
-network_client = NetworkManagementClient(credentials, subscription_id)
-network_client.virtual_networks.begin_create_or_update(rg_name, vnet_name, {}).result()
+# Create Virtual Network and Subnet
+vnet_name = "MyVNet"
+subnet_name = "MySubnet"
+vnet_params = {
+    "location": location,
+    "address_space": {"address_prefixes": ["10.0.0.0/16"]}
+}
+network_client.virtual_networks.begin_create_or_update(rg_name, vnet_name, vnet_params).result()
+
+subnet_params = {"address_prefix": "10.0.0.0/24"}
+network_client.subnets.begin_create_or_update(rg_name, vnet_name, subnet_name, subnet_params).result()
 
 # No subnet, NIC, or VM configurations provided
