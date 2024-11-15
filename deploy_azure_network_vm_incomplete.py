@@ -1,5 +1,7 @@
 # Script with missing and incorrect configurations
 
+# Importing the libraries
+
 from azure.identity import DefaultAzureCredential
 from azure.mgmt.resource import ResourceManagementClient
 from azure.mgmt.network import NetworkManagementClient
